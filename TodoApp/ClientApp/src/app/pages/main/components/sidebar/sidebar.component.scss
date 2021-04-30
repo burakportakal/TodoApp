@@ -1,0 +1,29 @@
+.save {
+    position: absolute;
+    left: 81%;
+    border: solid 1px #efefef;
+    border-radius: 0.5rem;
+    padding: 5px;
+    opacity: 0.7;
+    font-size: small;
+    height: 40px;
+    width: 66px;
+    text-align: center;
+    line-height: 1.5rem;
+}
+
+::marker {
+    color :rgb(184, 184, 184);
+        font-size: 1rem;
+}
+
+li {
+    line-height: 1rem;
+}
+
+.more-icon{
+    position: relative;
+    float: right;
+    top: 17px;
+    margin-right: 5px;
+}

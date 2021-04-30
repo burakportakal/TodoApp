@@ -1,0 +1,44 @@
+<div cdkDropList (cdkDropListDropped)="drop($event)" class="m-5 todo-container" style="width: 300px; min-width: 300px;">
+    <div class="px-4 pt-5 pb-5 flex flex-row bg-gray-600 rounded-xl text-white">
+        <div class="" style="flex-grow: 5; align-self: center;">
+            <h3>{{headerText}}</h3>
+
+        </div>
+        <div class="justify-end flex-grow" style="font-size: 1.5rem; text-align: right;">
+            <button (click)="openModal()"><mat-icon>add</mat-icon> </button>
+        </div>
+    </div>
+
+    <ng-container *ngFor="let todo of todoList">
+        <div cdkDrag [cdkDragData]="todo" [cdkDragDisabled]="editingTodo == todo.TaskId" *ngIf="!todo.IsDeleted" class="flex flex-row px-4 pt-5 pb-5 rounded-xl mt-2 todo-box" >
+        
+            <div (click)="openEditModal(todo)" [hidden]="editingTodo == todo.TaskId" class="todo-text pl-2"
+            style="flex-grow: 2; align-self: center;cursor: pointer;">
+            <h3>{{ todo.Name }}</h3>
+        </div>
+        <div *ngIf="editingTodo == todo.TaskId" class="todo-text pl-2"
+            style="flex-grow: 2; align-self: center;cursor: pointer;">
+            <input id="{{ 'input_' + todo.TaskId}}" (blur)="onBlur($event, todo)" class="h-10 px-5 text-sm bg-white border-2 border-gray-300 rounded-lg focus:outline-none"
+            type="text" value="{{todo.Name}}" style="width: 100%;" >
+        </div>
+        <div class="justify-end cursor-pointer" [matMenuTriggerFor]="contextMenu" [matMenuTriggerData]="{todo: todo}">
+            <mat-icon>more_horiz</mat-icon>
+        </div>
+       
+    </div>
+    </ng-container>
+ 
+</div>
+<mat-menu #contextMenu="matMenu" yPosition="below" xPosition="before">
+    <ng-template matMenuContent let-todo="todo">
+        <button mat-menu-item class="pr-2 pl-2" (click)="onEditClick(todo)">
+            <mat-icon>edit</mat-icon>
+            <span>Edit</span>
+        </button>
+        <button mat-menu-item class="pr-2 pl-2" (click)="onDeleteClick(todo)">
+            <mat-icon>delete</mat-icon>
+            <span>Delete</span>
+        </button>
+
+    </ng-template>
+</mat-menu>

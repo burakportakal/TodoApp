@@ -1,0 +1,24 @@
+<div id="myModal" class="modal pt-16 sm:pt-28">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="modal-header flex flex-row">
+            <div class="justify-start flex-grow font-bold">
+                {{ headerText }}
+            </div>
+            <div class="close-button font-bold justify-end">
+                <button (click)="closeModal()"><mat-icon>close</mat-icon></button>
+            </div>
+        </div>
+        <div class="modal-body">
+            <ng-template #modalTemplate>
+        
+            </ng-template>
+        </div>
+        <div class="modal-buttons text-center mb-4">
+            <a href="#" (click)="saveClick()" class="px-4 py-2 text-sm font-medium text-white  bg-gray-600  rounded-md"
+            aria-current="page">Save</a>
+        </div>
+    </div>
+  
+  </div>

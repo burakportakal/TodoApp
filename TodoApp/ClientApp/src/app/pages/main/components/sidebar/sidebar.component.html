@@ -1,0 +1,57 @@
+<div #sidebar
+    class="transform top-15 left-0 w-64 bg-white fixed h-full overflow-auto ease-in-out transition-all duration-300 z-30 md:translate-x-0"
+    class="{{ isOpen ? 'translate-x-0' : '-translate-x-full'}}"
+    style="width: 350px;height: 100%; background-color: #fafafa;">
+    <div class="justify-center pl-5">
+        <div [ngClass]="{'hidden': showAddCategory}" (click)="showAddCategory = true"
+            class="flex flex-row items-center pl-4 pr-2 pt-2 pb-2 bg-gray-600 rounded-xl text-white"
+            style="cursor: pointer;">
+            <button class="flex flex-grow text-justify"><span class="flex-grow">Project</span>
+                <mat-icon>add</mat-icon>
+            </button>
+        </div>
+        <div [ngClass]="{'hidden': !showAddCategory}" class="add-category flex">
+            <input [(ngModel)]="categoryName"
+                class="h-10 px-5 pr-16 text-sm bg-white border-2 border-gray-600 rounded-lg focus:outline-none"
+                style="width: 100%" type="name" name="name" placeholder="Name">
+            <a href="#" (click)="saveCategory()"
+                class="px-4 save py-2 text-sm font-medium text-white bg-gray-900 rounded-md"
+                aria-current="page">Save</a>
+        </div>
+        <div>
+            <ul class="list-inside list-disc">
+                <li *ngFor="let category of categoryList" class="pl-4 pt-4 pb-4 pr-1 hover:bg-gray-100 cursor-pointer">
+                    <div *ngIf="editingCategory != category.CategoryId" (click)="openCategory(category)"
+                        class="inline text-base">
+
+                        <span>{{ category.Name }}</span>
+                    </div>
+                    <div class="inline" *ngIf="editingCategory == category.CategoryId">
+                        <input id="{{ 'category_' + category.CategoryId}}" (blur)="onBlur($event, category)"
+                            class="text-sm bg-white border-2 border-gray-300 rounded-lg focus:outline-none" type="text"
+                            value="{{category.Name}}" style="width: 140px;">
+                    </div>
+
+                    <div class="float-right mr-1" [matMenuTriggerFor]="contextMenu"
+                        [matMenuTriggerData]="{category: category}">
+                        <mat-icon>more_horiz</mat-icon>
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<mat-menu #contextMenu="matMenu" yPosition="below" xPosition="before">
+    <ng-template matMenuContent let-category="category">
+        <button mat-menu-item class="pr-2 pl-2" (click)="onEditClick(category)">
+            <mat-icon>edit</mat-icon>
+            <span>Edit</span>
+        </button>
+        <button mat-menu-item class="pr-2 pl-2" (click)="onDeleteClick(category)">
+            <mat-icon>delete</mat-icon>
+            <span>Delete</span>
+        </button>
+
+    </ng-template>
+</mat-menu>

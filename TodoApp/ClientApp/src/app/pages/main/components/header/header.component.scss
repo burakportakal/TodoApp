@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+nav {
+  position: fixed;
+  min-height: 60px;
+  max-height: 70px;
+  width: 100%;
+  z-index: 2;
+  top:0;
+}
+a {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.break {
+  flex-basis: 100%;
+}
+
+#input-search {
+  border-radius: 10px 0 0 10px;
+}
+
+#btn-search {
+  border-radius: 0 10px 10px 0;
+}
